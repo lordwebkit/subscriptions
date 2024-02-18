@@ -1,7 +1,10 @@
 <script setup>
 import { ref } from 'vue'
+import { useMailingStore } from '@/stores/mailing'
 import GSwithToggle from '@/components/Global/GSwithToggle.vue'
+import SMailingCard from './SMailingCard.vue'
 
+const store = useMailingStore()
 const isChecked = ref(true)
 
 const toggle = () => {
@@ -22,6 +25,14 @@ const toggle = () => {
         <GSwithToggle :is-checked="isChecked" @switch="toggle" />
         <p class="roboto-regular">Подписаться на все рассылки</p>
       </div>
+      <div class="mt-7 flex flex-wrap gap-5">
+        <SMailingCard
+          class="mailing__card"
+          v-for="mailing in store.mailing"
+          :key="mailing.id"
+          :mailing="mailing"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -29,5 +40,9 @@ const toggle = () => {
 .mailing__title {
   font-size: 24px;
   line-height: 32px;
+}
+
+.mailing__card {
+  width: calc(50% - 1.5rem);
 }
 </style>

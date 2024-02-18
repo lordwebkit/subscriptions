@@ -2,7 +2,7 @@
 import IFooterLogo from '@/assets/icons/IFooterLogo.vue'
 </script>
 <template>
-  <div class="container mx-auto pt-12">
+  <div class="container mx-auto pt-12 pb-12">
     <div class="flex justify-center">
       <IFooterLogo />
     </div>
