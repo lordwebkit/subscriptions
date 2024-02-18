@@ -1,6 +1,14 @@
+<script setup>
+import { ref } from 'vue'
+
+const tabs = ref(['Рассылки', 'Соцсети', 'Мессенджеры'])
+
+const activeTabIndex = ref(0)
+</script>
+
 <template>
-  <div class="">
-    <div class="flex justify-center gap-5">
+  <div class="tabs">
+    <div class="roboto-medium flex justify-center gap-5">
       <button
         v-for="(tab, index) in tabs"
         :key="index"
@@ -12,7 +20,7 @@
           'text-gray-600': activeTabIndex !== index,
           'border-transparent': activeTabIndex !== index
         }"
-        class="py-2 border-b-2 focus:outline-none"
+        class="tabs__btn border-b-2 focus:outline-none"
       >
         {{ tab }}
       </button>
@@ -20,10 +28,11 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-
-const tabs = ref(['Рассылки', 'Соцсети', 'Мессенджеры'])
-
-const activeTabIndex = ref(0)
-</script>
+<style scoped>
+.tabs__btn {
+  font-size: 17px;
+  letter-spacing: -0.3px;
+  padding-top: 0.75rem;
+  padding-bottom: 0.9rem;
+}
+</style>

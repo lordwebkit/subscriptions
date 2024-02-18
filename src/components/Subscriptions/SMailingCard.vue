@@ -1,12 +1,20 @@
 <script setup>
+import { ref } from 'vue'
 import ICheck from '@/assets/icons/ICheck.vue'
-import SSwithToggle from '@/components/Global/GSwithToggle.vue'
-const props = defineProps(['mailing'])
+import SSwitchToggle from '@/components/Global/GSwitchToggle.vue'
+import { useMailingStore } from '@/stores/mailing'
 
+const store = useMailingStore()
+
+const toggle = () => {
+  store.mailing[props.mailing.id].selected = !store.mailing[props.mailing.id].selected
+}
+
+const props = defineProps(['mailing'])
 </script>
 <template>
   <div class="mailing-card roboto-regular bg-white p-6 rounded-lg flex gap-6">
-    <div class="">
+    <div class="flex-1">
       <p class="mailing-card__time text-gray-400">{{ props.mailing.time }}</p>
       <h2 class="mailing-card__title roboto-medium">{{ props.mailing.title }}</h2>
       <p class="mailing-card__description text-gray-500 mt-2 mb-4">
@@ -22,10 +30,16 @@ const props = defineProps(['mailing'])
           <p>{{ advantage }}</p>
         </li>
       </ul>
-      <p class="mt-4 flex gap-2"><SSwithToggle />Уже получает {{ props.mailing.subscription }} человек</p>
+      <p class="mt-4 flex gap-2">
+        <SSwitchToggle
+          :size="12"
+          :is-checked="store.mailing[props.mailing.id].selected"
+          @switch="toggle"
+        />Уже получает {{ props.mailing.subscription }} человек
+      </p>
     </div>
-    <div class="">
-      <img :src="props.mailing.img" alt="картинка рассылки" />
+    <div class="mailing-card__image-container">
+      <img class="mailing-card__image" :src="props.mailing.img" alt="картинка рассылки" />
     </div>
   </div>
 </template>
@@ -42,5 +56,10 @@ const props = defineProps(['mailing'])
 .mailing-card__title {
   font-size: 20px;
   line-height: 28px;
+  letter-spacing: -0.1px;
+}
+
+.mailing-card__image {
+  width: 80px;
 }
 </style>
