@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Subscriptions from '@/views/Subscriptions.vue'
+import SubscriptionsView from '@/views/SubscriptionsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,8 +7,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'subscriptions',
-      component: Subscriptions
-    },
+      component: SubscriptionsView
+    }
   ]
 })
 
