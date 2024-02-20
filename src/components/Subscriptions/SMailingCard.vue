@@ -1,16 +1,14 @@
 <script setup>
-import { ref } from 'vue'
 import ICheck from '@/assets/icons/ICheck.vue'
 import SSwitchToggle from '@/components/Global/GSwitchToggle.vue'
 import { useMailingStore } from '@/stores/mailing'
 
 const store = useMailingStore()
+const props = defineProps(['mailing'])
 
 const toggle = () => {
   store.mailing[props.mailing.id].selected = !store.mailing[props.mailing.id].selected
 }
-
-const props = defineProps(['mailing'])
 </script>
 <template>
   <div class="mailing-card roboto-regular bg-white p-6 rounded-lg flex gap-6">
@@ -30,7 +28,7 @@ const props = defineProps(['mailing'])
           <p>{{ advantage }}</p>
         </li>
       </ul>
-      <p class="mt-4 flex gap-2">
+      <p class="mt-4 flex gap-2 flex-col-reverse lg:flex-row">
         <SSwitchToggle
           :size="12"
           :is-checked="store.mailing[props.mailing.id].selected"
@@ -61,5 +59,11 @@ const props = defineProps(['mailing'])
 
 .mailing-card__image {
   width: 80px;
+}
+
+@media (max-width: 766px) {
+  .mailing-card__image {
+    width: 40px;
+  }
 }
 </style>

@@ -41,7 +41,7 @@ store.getMailing()
         />
         <p class="subscription__title roboto-regular">Подписаться на все рассылки</p>
       </div>
-      <div class="mt-8 flex flex-wrap gap-6">
+      <div class="mt-8 flex-col flex flex-wrap sm:flex-row gap-6">
         <SMailingCard
           v-if="store.mailing"
           v-for="mailing in store.mailing"
@@ -60,8 +60,10 @@ store.getMailing()
   letter-spacing: -0.25px;
 }
 
-.mailing__card {
-  width: calc(50% - 0.75rem);
+@media (min-width: 640px) {
+  .mailing__card {
+    width: calc(50% - 0.75rem);
+  }
 }
 
 .subscription__title {
