@@ -3,6 +3,11 @@ import { defineStore } from 'pinia'
 
 export const useMailingStore = defineStore('mailing', () => {
   const mailing = ref([])
+  const popupIsOpen = ref(false)
+  const selectedMailing = computed(() => {
+    return mailing.value.filter((item) => item.selected).map((item) => item.id)
+  })
+  const email = ref()
 
   const selectedAllMailing = computed(() => {
     let selected = true
@@ -84,11 +89,30 @@ export const useMailingStore = defineStore('mailing', () => {
     }
   }
 
+  async function sendEmail() {
+    try {
+      console.log('Sended data ...', {
+        email: email.value,
+        selectRubric: JSON.stringify(selectedMailing.value)
+      })
+
+      email.value = ''
+      unselectAllMailing()
+      popupIsOpen.value = true
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   return {
+    email,
     mailing,
+    popupIsOpen,
+    selectedMailing,
     getMailing,
     selectedAllMailing,
     selectAllMailing,
-    unselectAllMailing
+    unselectAllMailing,
+    sendEmail
   }
 })

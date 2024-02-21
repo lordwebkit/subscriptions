@@ -11,7 +11,7 @@ const toggle = () => {
 }
 </script>
 <template>
-  <div class="mailing-card roboto-regular bg-white py-6 px-3 rounded-lg flex gap-6">
+  <div class="mailing-card hover:shadow-md roboto-regular bg-white py-6 px-3 rounded-lg flex gap-6">
     <div class="flex-1">
       <div class="flex justify-between">
         <div class="">

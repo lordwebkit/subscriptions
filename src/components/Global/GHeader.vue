@@ -6,9 +6,15 @@ const route = ['Хлебные крошки', 'Хлебные крошки', 'Х
   <header class="container mx-auto pt-6 sm:pt-12">
     <div class="flex items-center flex-col">
       <ILogo />
-      <nav class="roboto-regular list-none flex flex-wrap gap-3 items-center text-gray-400 mt-7 sm:mt-6">
+      <nav
+        class="roboto-regular list-none flex flex-wrap gap-3 items-center text-gray-400 mt-7 sm:mt-6"
+      >
         <div class="flex" v-for="(routeItem, index) in route" :key="index">
-          <li class="nav__item flex items-center border-gray-400 border-solid">{{ routeItem }}</li>
+          <li
+            class="nav__item flex items-center border-gray-400 border-solid hover:text-blue-500 cursor-pointer hover:border-blue-500"
+          >
+            {{ routeItem }}
+          </li>
           <span class="nav__item-decor" v-if="index !== route.length - 1">→</span>
         </div>
       </nav>

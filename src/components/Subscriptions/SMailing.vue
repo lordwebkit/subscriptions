@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue'
 import { useMailingStore } from '@/stores/mailing'
 import GSwitchToggle from '@/components/Global/GSwitchToggle.vue'
 import SMailingCard from './SMailingCard.vue'
@@ -14,6 +15,10 @@ const toggle = () => {
   }
 }
 
+const buttonDisabled = computed(() => {
+  return !store.email || !store.selectedMailing.length
+})
+
 store.getMailing()
 </script>
 <template>
@@ -23,20 +28,39 @@ store.getMailing()
     </h2>
     <div class="">
       <form
+        @click.prevent
         class="mailing__form flex sm:mx-6 bg-white rounded-tr-full rounded-br-full mt-4 sm:mt-6"
       >
         <input
           class="roboto__medium form__input flex-1 p-4"
-          type="mail"
+          type="email"
           placeholder="Электронная почта"
+          v-model="store.email"
         />
         <button
-          class="bg-blue-500 rounded-full hidden sm:flex items-center justify-center text-white px-8 py-4"
+          class="rounded-full hidden sm:flex items-center justify-center text-white px-8 py-4"
+          :disabled="buttonDisabled"
+          @click="store.sendEmail"
+          :class="[
+            {
+              'bg-blue-500 cursor-pointer active:bg-blue-400 hover:bg-blue-600':
+                store.email && store.selectedMailing.length
+            },
+            { 'bg-gray-500 cursor-default': buttonDisabled }
+          ]"
         >
           Подписаться
         </button>
         <button
-          class="bg-blue-500 rounded-full flex items-center justify-center sm:hidden text-white px-6 py-4"
+          class="rounded-full flex items-center justify-center sm:hidden text-white px-6 py-4"
+          @click="store.sendEmail"
+          :class="[
+            {
+              'bg-blue-500 cursor-pointer active:bg-blue-400 hover:bg-blue-600':
+                store.email && store.selectedMailing.length
+            },
+            { 'bg-gray-500 cursor-default': buttonDisabled }
+          ]"
         >
           <IArrow />
         </button>
